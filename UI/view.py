@@ -25,18 +25,22 @@ class View(ft.UserControl):
         self._page.controls.append(self._title)
 
         self._ddyear = ft.Dropdown(label="Anno")
+        self._ddmetodo = ft.Dropdown(label="Metodo")
+        self._txtS = ft.TextField(label="Valore numerico S")
         self._btnCreaGrafo = ft.ElevatedButton(text="Crea Grafo", on_click=self._controller.handleCreaGrafo)
 
         cont = ft.Container(self._ddyear, width=250, alignment=ft.alignment.top_left)
-        row1 = ft.Row([cont, self._btnCreaGrafo], alignment=ft.MainAxisAlignment.CENTER,
+        cont2 = ft.Container(self._ddmetodo, width=250, alignment=ft.alignment.top_left)
+        row1 = ft.Row([cont, cont2, self._txtS, self._btnCreaGrafo], alignment=ft.MainAxisAlignment.CENTER,
                       vertical_alignment=ft.CrossAxisAlignment.END)
 
-        self._ddmetodo = ft.Dropdown(label="Metodo")
         self._btnProdotti = ft.ElevatedButton(text="Calcola Prodotti Redditizzi", on_click=self._controller.handleProdotti)
-        cont2 = ft.Container(self._ddmetodo, width=250, alignment=ft.alignment.top_left)
-        row2 = ft.Row([cont2, ft.Container(self._btnProdotti, width=250)
+        row2 = ft.Row([ft.Container(self._btnProdotti, width=250)
         ], alignment=ft.MainAxisAlignment.CENTER)
 
+        # lancio i metodi del controller
+        self._controller.fill_DD_metodo()
+        self._controller.fill_DD_anno()
 
         self._page.controls.append(row1)
         self._page.controls.append(row2)
